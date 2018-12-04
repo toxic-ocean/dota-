@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel=stylesheet href=vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css>
+<link rel=stylesheet href=vendors/bower_components/animate.css/animate.min.css>
+<link rel=stylesheet href=vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css>
+<link rel=stylesheet href=vendors/bower_components/fullcalendar/dist/fullcalendar.min.css>
+<link rel=stylesheet href=css/app.min.css>
+<style>img{width:75px}</style>
+</head>
+<body data-ma-theme=red>
+<main class=main>
+<div class=page-loader>
+<div class=page-loader__spinner>
+<svg viewBox="25 25 50 50">
+<circle cx=50 cy=50 r=20 fill=none stroke-width=2 stroke-miterlimit=10 />
+</svg>
+</div>
+</div>
+<header class=header>
+<div class="header__logo hidden-sm-down">
+<h1><a href>DOTA++</a></h1>
+</div>
+</header>
+<section class="content content--full">
+<div class=content__inner>
+<header class=content__title>
+<h1>Simulation Outcome</h1>
+</header>
+<div class=card>
+<div class=card-body>
+<table class="table mb-0">
+<thead>
+<tr>
+<th>Radiant</th>
+<th>Dire</th>
+<th>Radiant Win Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<img src=img/images/14.png>
+<img src=img/images/15.png>
+<img src=img/images/19.png>
+<img src=img/images/29.png>
+<img src=img/images/87.png>
+</td>
+<td>
+<img src=img/images/16.png>
+<img src=img/images/25.png>
+<img src=img/images/56.png>
+<img src=img/images/67.png>
+<img src=img/images/106.png>
+</td>
+<td>70.78%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/36.png>
+<img src=img/images/47.png>
+<img src=img/images/62.png>
+<img src=img/images/70.png>
+<img src=img/images/72.png>
+</td>
+<td>
+<img src=img/images/6.png>
+<img src=img/images/43.png>
+<img src=img/images/60.png>
+<img src=img/images/69.png>
+<img src=img/images/78.png>
+</td>
+<td>53.87%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/11.png>
+<img src=img/images/12.png>
+<img src=img/images/13.png>
+<img src=img/images/17.png>
+<img src=img/images/33.png>
+</td>
+<td>
+<img src=img/images/28.png>
+<img src=img/images/37.png>
+<img src=img/images/54.png>
+<img src=img/images/66.png>
+<img src=img/images/106.png>
+</td>
+<td>52.62%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/50.png>
+<img src=img/images/60.png>
+<img src=img/images/75.png>
+<img src=img/images/107.png>
+<img src=img/images/121.png>
+</td>
+<td>
+<img src=img/images/18.png>
+<img src=img/images/29.png>
+<img src=img/images/36.png>
+<img src=img/images/77.png>
+<img src=img/images/109.png>
+</td>
+<td>30.93%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/34.png>
+<img src=img/images/39.png>
+<img src=img/images/42.png>
+<img src=img/images/96.png>
+<img src=img/images/110.png>
+</td>
+<td>
+<img src=img/images/4.png>
+<img src=img/images/6.png>
+<img src=img/images/47.png>
+<img src=img/images/53.png>
+<img src=img/images/85.png>
+</td>
+<td>47.04%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/21.png>
+<img src=img/images/35.png>
+<img src=img/images/80.png>
+<img src=img/images/87.png>
+<img src=img/images/114.png>
+</td>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/20.png>
+<img src=img/images/50.png>
+<img src=img/images/63.png>
+<img src=img/images/102.png>
+</td>
+<td>29.03%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/67.png>
+<img src=img/images/75.png>
+<img src=img/images/81.png>
+<img src=img/images/85.png>
+<img src=img/images/95.png>
+</td>
+<td>
+<img src=img/images/12.png>
+<img src=img/images/26.png>
+<img src=img/images/27.png>
+<img src=img/images/54.png>
+<img src=img/images/99.png>
+</td>
+<td>79.49%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/21.png>
+<img src=img/images/28.png>
+<img src=img/images/59.png>
+<img src=img/images/87.png>
+<img src=img/images/88.png>
+</td>
+<td>
+<img src=img/images/3.png>
+<img src=img/images/9.png>
+<img src=img/images/81.png>
+<img src=img/images/95.png>
+<img src=img/images/110.png>
+</td>
+<td>54.18%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/31.png>
+<img src=img/images/48.png>
+<img src=img/images/51.png>
+<img src=img/images/59.png>
+<img src=img/images/102.png>
+</td>
+<td>
+<img src=img/images/19.png>
+<img src=img/images/36.png>
+<img src=img/images/64.png>
+<img src=img/images/104.png>
+<img src=img/images/121.png>
+</td>
+<td>59.73%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/16.png>
+<img src=img/images/61.png>
+<img src=img/images/72.png>
+<img src=img/images/93.png>
+<img src=img/images/120.png>
+</td>
+<td>
+<img src=img/images/47.png>
+<img src=img/images/48.png>
+<img src=img/images/55.png>
+<img src=img/images/92.png>
+<img src=img/images/109.png>
+</td>
+<td>36.22%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/12.png>
+<img src=img/images/13.png>
+<img src=img/images/30.png>
+<img src=img/images/97.png>
+<img src=img/images/111.png>
+</td>
+<td>
+<img src=img/images/64.png>
+<img src=img/images/92.png>
+<img src=img/images/98.png>
+<img src=img/images/101.png>
+<img src=img/images/102.png>
+</td>
+<td>40.24%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/23.png>
+<img src=img/images/61.png>
+<img src=img/images/73.png>
+<img src=img/images/74.png>
+<img src=img/images/87.png>
+</td>
+<td>
+<img src=img/images/12.png>
+<img src=img/images/22.png>
+<img src=img/images/38.png>
+<img src=img/images/75.png>
+<img src=img/images/111.png>
+</td>
+<td>45.24%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/4.png>
+<img src=img/images/7.png>
+<img src=img/images/11.png>
+<img src=img/images/18.png>
+<img src=img/images/105.png>
+</td>
+<td>
+<img src=img/images/9.png>
+<img src=img/images/43.png>
+<img src=img/images/63.png>
+<img src=img/images/86.png>
+<img src=img/images/107.png>
+</td>
+<td>59.59%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/49.png>
+<img src=img/images/60.png>
+<img src=img/images/69.png>
+<img src=img/images/80.png>
+<img src=img/images/102.png>
+</td>
+<td>
+<img src=img/images/30.png>
+<img src=img/images/95.png>
+<img src=img/images/109.png>
+<img src=img/images/110.png>
+<img src=img/images/121.png>
+</td>
+<td>52.22%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/13.png>
+<img src=img/images/18.png>
+<img src=img/images/21.png>
+<img src=img/images/52.png>
+<img src=img/images/104.png>
+</td>
+<td>
+<img src=img/images/28.png>
+<img src=img/images/44.png>
+<img src=img/images/74.png>
+<img src=img/images/78.png>
+<img src=img/images/103.png>
+</td>
+<td>42.88%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/38.png>
+<img src=img/images/68.png>
+<img src=img/images/85.png>
+<img src=img/images/97.png>
+<img src=img/images/113.png>
+</td>
+<td>
+<img src=img/images/21.png>
+<img src=img/images/50.png>
+<img src=img/images/54.png>
+<img src=img/images/89.png>
+<img src=img/images/101.png>
+</td>
+<td>39.80%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/9.png>
+<img src=img/images/44.png>
+<img src=img/images/47.png>
+<img src=img/images/94.png>
+<img src=img/images/121.png>
+</td>
+<td>
+<img src=img/images/10.png>
+<img src=img/images/15.png>
+<img src=img/images/42.png>
+<img src=img/images/52.png>
+<img src=img/images/83.png>
+</td>
+<td>61.36%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/2.png>
+<img src=img/images/38.png>
+<img src=img/images/48.png>
+<img src=img/images/69.png>
+<img src=img/images/92.png>
+</td>
+<td>
+<img src=img/images/15.png>
+<img src=img/images/63.png>
+<img src=img/images/72.png>
+<img src=img/images/84.png>
+<img src=img/images/111.png>
+</td>
+<td>59.00%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/5.png>
+<img src=img/images/11.png>
+<img src=img/images/12.png>
+<img src=img/images/60.png>
+<img src=img/images/110.png>
+</td>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/13.png>
+<img src=img/images/20.png>
+<img src=img/images/43.png>
+<img src=img/images/65.png>
+</td>
+<td>65.12%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/23.png>
+<img src=img/images/37.png>
+<img src=img/images/64.png>
+<img src=img/images/98.png>
+<img src=img/images/107.png>
+</td>
+<td>
+<img src=img/images/2.png>
+<img src=img/images/13.png>
+<img src=img/images/52.png>
+<img src=img/images/62.png>
+<img src=img/images/97.png>
+</td>
+<td>70.14%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/14.png>
+<img src=img/images/38.png>
+<img src=img/images/48.png>
+<img src=img/images/53.png>
+<img src=img/images/79.png>
+</td>
+<td>
+<img src=img/images/7.png>
+<img src=img/images/56.png>
+<img src=img/images/68.png>
+<img src=img/images/108.png>
+<img src=img/images/120.png>
+</td>
+<td>49.95%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/19.png>
+<img src=img/images/22.png>
+<img src=img/images/36.png>
+<img src=img/images/54.png>
+<img src=img/images/63.png>
+</td>
+<td>
+<img src=img/images/8.png>
+<img src=img/images/32.png>
+<img src=img/images/39.png>
+<img src=img/images/61.png>
+<img src=img/images/98.png>
+</td>
+<td>68.43%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/10.png>
+<img src=img/images/49.png>
+<img src=img/images/70.png>
+<img src=img/images/71.png>
+<img src=img/images/120.png>
+</td>
+<td>
+<img src=img/images/18.png>
+<img src=img/images/22.png>
+<img src=img/images/82.png>
+<img src=img/images/88.png>
+<img src=img/images/95.png>
+</td>
+<td>40.32%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/29.png>
+<img src=img/images/33.png>
+<img src=img/images/78.png>
+<img src=img/images/99.png>
+<img src=img/images/119.png>
+</td>
+<td>
+<img src=img/images/3.png>
+<img src=img/images/12.png>
+<img src=img/images/36.png>
+<img src=img/images/81.png>
+<img src=img/images/84.png>
+</td>
+<td>45.73%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/4.png>
+<img src=img/images/11.png>
+<img src=img/images/47.png>
+<img src=img/images/105.png>
+<img src=img/images/109.png>
+</td>
+<td>
+<img src=img/images/6.png>
+<img src=img/images/30.png>
+<img src=img/images/68.png>
+<img src=img/images/82.png>
+<img src=img/images/84.png>
+</td>
+<td>51.90%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/21.png>
+<img src=img/images/47.png>
+<img src=img/images/73.png>
+<img src=img/images/86.png>
+<img src=img/images/94.png>
+</td>
+<td>
+<img src=img/images/53.png>
+<img src=img/images/87.png>
+<img src=img/images/97.png>
+<img src=img/images/98.png>
+<img src=img/images/107.png>
+</td>
+<td>55.48%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/3.png>
+<img src=img/images/8.png>
+<img src=img/images/52.png>
+<img src=img/images/72.png>
+<img src=img/images/101.png>
+</td>
+<td>
+<img src=img/images/15.png>
+<img src=img/images/28.png>
+<img src=img/images/36.png>
+<img src=img/images/48.png>
+<img src=img/images/68.png>
+</td>
+<td>28.74%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/12.png>
+<img src=img/images/23.png>
+<img src=img/images/39.png>
+<img src=img/images/81.png>
+<img src=img/images/109.png>
+</td>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/50.png>
+<img src=img/images/99.png>
+<img src=img/images/104.png>
+<img src=img/images/120.png>
+</td>
+<td>46.99%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/6.png>
+<img src=img/images/12.png>
+<img src=img/images/61.png>
+<img src=img/images/82.png>
+<img src=img/images/114.png>
+</td>
+<td>
+<img src=img/images/50.png>
+<img src=img/images/67.png>
+<img src=img/images/74.png>
+<img src=img/images/99.png>
+<img src=img/images/111.png>
+</td>
+<td>50.17%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/10.png>
+<img src=img/images/56.png>
+<img src=img/images/105.png>
+<img src=img/images/106.png>
+<img src=img/images/111.png>
+</td>
+<td>
+<img src=img/images/79.png>
+<img src=img/images/86.png>
+<img src=img/images/90.png>
+<img src=img/images/103.png>
+<img src=img/images/109.png>
+</td>
+<td>19.19%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/22.png>
+<img src=img/images/51.png>
+<img src=img/images/73.png>
+<img src=img/images/80.png>
+<img src=img/images/94.png>
+</td>
+<td>
+<img src=img/images/25.png>
+<img src=img/images/72.png>
+<img src=img/images/76.png>
+<img src=img/images/82.png>
+<img src=img/images/108.png>
+</td>
+<td>68.81%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/31.png>
+<img src=img/images/39.png>
+<img src=img/images/55.png>
+<img src=img/images/78.png>
+<img src=img/images/104.png>
+</td>
+<td>
+<img src=img/images/17.png>
+<img src=img/images/44.png>
+<img src=img/images/53.png>
+<img src=img/images/67.png>
+<img src=img/images/97.png>
+</td>
+<td>59.04%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/61.png>
+<img src=img/images/63.png>
+<img src=img/images/91.png>
+<img src=img/images/94.png>
+<img src=img/images/99.png>
+</td>
+<td>
+<img src=img/images/2.png>
+<img src=img/images/32.png>
+<img src=img/images/51.png>
+<img src=img/images/54.png>
+<img src=img/images/119.png>
+</td>
+<td>22.41%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/39.png>
+<img src=img/images/40.png>
+<img src=img/images/102.png>
+<img src=img/images/105.png>
+<img src=img/images/110.png>
+</td>
+<td>
+<img src=img/images/2.png>
+<img src=img/images/19.png>
+<img src=img/images/47.png>
+<img src=img/images/90.png>
+<img src=img/images/101.png>
+</td>
+<td>64.37%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/13.png>
+<img src=img/images/14.png>
+<img src=img/images/23.png>
+<img src=img/images/78.png>
+<img src=img/images/93.png>
+</td>
+<td>
+<img src=img/images/3.png>
+<img src=img/images/35.png>
+<img src=img/images/57.png>
+<img src=img/images/63.png>
+<img src=img/images/64.png>
+</td>
+<td>34.43%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/3.png>
+<img src=img/images/36.png>
+<img src=img/images/97.png>
+<img src=img/images/101.png>
+<img src=img/images/107.png>
+</td>
+<td>
+<img src=img/images/34.png>
+<img src=img/images/38.png>
+<img src=img/images/57.png>
+<img src=img/images/84.png>
+<img src=img/images/94.png>
+</td>
+<td>40.01%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/27.png>
+<img src=img/images/40.png>
+<img src=img/images/52.png>
+<img src=img/images/59.png>
+<img src=img/images/88.png>
+</td>
+<td>
+<img src=img/images/36.png>
+<img src=img/images/63.png>
+<img src=img/images/72.png>
+<img src=img/images/85.png>
+<img src=img/images/121.png>
+</td>
+<td>41.54%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/3.png>
+<img src=img/images/11.png>
+<img src=img/images/43.png>
+<img src=img/images/75.png>
+</td>
+<td>
+<img src=img/images/8.png>
+<img src=img/images/60.png>
+<img src=img/images/83.png>
+<img src=img/images/111.png>
+<img src=img/images/121.png>
+</td>
+<td>49.69%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/38.png>
+<img src=img/images/57.png>
+<img src=img/images/61.png>
+<img src=img/images/81.png>
+<img src=img/images/110.png>
+</td>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/56.png>
+<img src=img/images/71.png>
+<img src=img/images/107.png>
+<img src=img/images/113.png>
+</td>
+<td>74.05%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/20.png>
+<img src=img/images/58.png>
+<img src=img/images/63.png>
+<img src=img/images/85.png>
+<img src=img/images/92.png>
+</td>
+<td>
+<img src=img/images/12.png>
+<img src=img/images/25.png>
+<img src=img/images/30.png>
+<img src=img/images/76.png>
+<img src=img/images/94.png>
+</td>
+<td>57.75%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/6.png>
+<img src=img/images/81.png>
+<img src=img/images/88.png>
+<img src=img/images/102.png>
+<img src=img/images/106.png>
+</td>
+<td>
+<img src=img/images/11.png>
+<img src=img/images/18.png>
+<img src=img/images/32.png>
+<img src=img/images/89.png>
+<img src=img/images/92.png>
+</td>
+<td>61.29%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/18.png>
+<img src=img/images/32.png>
+<img src=img/images/47.png>
+<img src=img/images/80.png>
+</td>
+<td>
+<img src=img/images/26.png>
+<img src=img/images/44.png>
+<img src=img/images/49.png>
+<img src=img/images/73.png>
+<img src=img/images/96.png>
+</td>
+<td>47.11%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/16.png>
+<img src=img/images/25.png>
+<img src=img/images/50.png>
+<img src=img/images/78.png>
+<img src=img/images/103.png>
+</td>
+<td>
+<img src=img/images/17.png>
+<img src=img/images/52.png>
+<img src=img/images/68.png>
+<img src=img/images/69.png>
+<img src=img/images/74.png>
+</td>
+<td>64.84%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/11.png>
+<img src=img/images/39.png>
+<img src=img/images/49.png>
+<img src=img/images/110.png>
+<img src=img/images/111.png>
+</td>
+<td>
+<img src=img/images/16.png>
+<img src=img/images/51.png>
+<img src=img/images/60.png>
+<img src=img/images/83.png>
+<img src=img/images/93.png>
+</td>
+<td>38.28%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/30.png>
+<img src=img/images/35.png>
+<img src=img/images/74.png>
+<img src=img/images/94.png>
+<img src=img/images/119.png>
+</td>
+<td>
+<img src=img/images/31.png>
+<img src=img/images/47.png>
+<img src=img/images/66.png>
+<img src=img/images/100.png>
+<img src=img/images/121.png>
+</td>
+<td>54.01%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/21.png>
+<img src=img/images/60.png>
+<img src=img/images/76.png>
+<img src=img/images/81.png>
+<img src=img/images/114.png>
+</td>
+<td>
+<img src=img/images/30.png>
+<img src=img/images/43.png>
+<img src=img/images/56.png>
+<img src=img/images/90.png>
+<img src=img/images/102.png>
+</td>
+<td>35.13%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/14.png>
+<img src=img/images/62.png>
+<img src=img/images/78.png>
+<img src=img/images/93.png>
+<img src=img/images/120.png>
+</td>
+<td>
+<img src=img/images/7.png>
+<img src=img/images/77.png>
+<img src=img/images/100.png>
+<img src=img/images/103.png>
+<img src=img/images/114.png>
+</td>
+<td>44.35%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/1.png>
+<img src=img/images/16.png>
+<img src=img/images/35.png>
+<img src=img/images/88.png>
+<img src=img/images/89.png>
+</td>
+<td>
+<img src=img/images/14.png>
+<img src=img/images/55.png>
+<img src=img/images/68.png>
+<img src=img/images/70.png>
+<img src=img/images/80.png>
+</td>
+<td>42.87%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/6.png>
+<img src=img/images/103.png>
+<img src=img/images/104.png>
+<img src=img/images/105.png>
+<img src=img/images/108.png>
+</td>
+<td>
+<img src=img/images/17.png>
+<img src=img/images/35.png>
+<img src=img/images/59.png>
+<img src=img/images/64.png>
+<img src=img/images/119.png>
+</td>
+<td>61.78%</td>
+</tr>
+<tr>
+<td>
+<img src=img/images/52.png>
+<img src=img/images/94.png>
+<img src=img/images/105.png>
+<img src=img/images/108.png>
+<img src=img/images/114.png>
+</td>
+<td>
+<img src=img/images/20.png>
+<img src=img/images/35.png>
+<img src=img/images/37.png>
+<img src=img/images/83.png>
+<img src=img/images/99.png>
+</td>
+<td>48.76%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<footer class="footer hidden-xs-down">
+<p>© INFSCI 2160 Fall 2018 - Group 16. All rights reserved.</p>
+</footer>
+</section>
+</main>
+<!--[if IE]>
+<div class=ie-warning>
+<h1>Warning!!</h1>
+<p>You are using an outdated version of Internet Explorer, please upgrade to any of the following web browsers to access this website.</p>
+<div class=ie-warning__downloads>
+<a href=http://www.google.com/chrome>
+<img src=img/browsers/chrome.png alt>
+</a>
+<a href=https://www.mozilla.org/en-US/firefox/new>
+<img src=img/browsers/firefox.png alt>
+</a>
+<a href=http://www.opera.com>
+<img src=img/browsers/opera.png alt>
+</a>
+<a href=https://support.apple.com/downloads/safari>
+<img src=img/browsers/safari.png alt>
+</a>
+<a href=https://www.microsoft.com/en-us/windows/microsoft-edge>
+<img src=img/browsers/edge.png alt>
+</a>
+<a href=http://windows.microsoft.com/en-us/internet-explorer/download-ie>
+<img src=img/browsers/ie.png alt>
+</a>
+</div>
+<p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<script src=vendors/bower_components/jquery/dist/jquery.min.js></script>
+<script src=vendors/bower_components/popper.js/dist/umd/popper.min.js></script>
+<script src=vendors/bower_components/bootstrap/dist/js/bootstrap.min.js></script>
+<script src=vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js></script>
+<script src=vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js></script>
+<script src=vendors/bower_components/flot/jquery.flot.js></script>
+<script src=vendors/bower_components/flot/jquery.flot.resize.js></script>
+<script src=vendors/bower_components/flot.curvedlines/curvedLines.js></script>
+<script src=vendors/bower_components/jqvmap/dist/jquery.vmap.min.js></script>
+<script src=vendors/bower_components/jqvmap/dist/maps/jquery.vmap.world.js></script>
+<script src=vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js></script>
+<script src=vendors/bower_components/salvattore/dist/salvattore.min.js></script>
+<script src=vendors/jquery.sparkline/jquery.sparkline.min.js></script>
+<script src=vendors/bower_components/moment/min/moment.min.js></script>
+<script src=vendors/bower_components/fullcalendar/dist/fullcalendar.min.js></script>
+<script src=demo/js/flot-charts/curved-line.js></script>
+<script src=demo/js/flot-charts/dynamic.js></script>
+<script src=demo/js/flot-charts/line.js></script>
+<script src=demo/js/flot-charts/chart-tooltips.js></script>
+<script src=demo/js/other-charts.js></script>
+<script src=demo/js/jqvmap.js></script>
+<script src=js/app.min.js></script>
+</body>
+</html>
