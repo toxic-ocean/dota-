@@ -1,0 +1,94 @@
+---
+title: "INFSCI 2160 Final Project"
+output: html_notebook
+---
+
+## Setup
+
+Setup some basic packages for our project, this project requires Python or Anaconda installed.
+
+```{r}
+{
+  #install.packages("keras")
+  install.packages("data.table")
+  install.packages("rsample")
+  library(keras)
+  #install_keras()
+}
+```
+
+
+## Build Ground-Truth NN model
+
+Reference <https://keras.rstudio.com/reference/index.html>
+
+### Load Data
+
+```{r}
+library(data.table)
+library(rsample)
+#set.seed(1111)
+lineup = fread('F:/lineups_odota_demo_encoded.csv', sep = ',')
+lineup_sp = initial_split(lineup, prop = 0.9)
+train_data = training(lineup_sp)
+test_data = testing(lineup_sp)
+trainX = train_data[,1:128]
+trainY = train_data[,129]
+testX = test_data[,1:128]
+testY = test_data[,129]
+```
+
+### Define the model
+
+```{r}
+gtModel <- function(train_data) {
+  model <- keras_model_sequential()
+  model %>%
+  layer_dense(units = 64, activation = "relu", input_shape = c(ncol(train_data))) %>%
+  layer_dense(units = 64, activation = "relu") %>%
+  layer_dense(units = 1, activation = "sigmoid")
+
+  model %>% compile(
+    optimizer = 'adam',
+    loss = 'binary_crossentropy',
+    metrics = list("accuracy")
+  )
+  return(model)
+}
+```
+
+### Train It
+
+```{r}
+model = gtModel(trainX)
+model %>% fit(
+  data.matrix(trainX),
+  data.matrix(trainY),
+  epochs = 5
+)
+save_model_hdf5(model, "train01/m1.hdf5")
+```
+
+```{r}
+mEval = evaluate(model, x = data.matrix(testX), y=data.matrix(testY))
+sprintf("Loss: %f  Accuracy: %f", mEval$loss, mEval$acc) 
+```
+
+### Train Again
+
+```{r}
+model = load_model_hdf5("train01/m1.hdf5")
+model %>% fit(
+  data.matrix(trainX),
+  data.matrix(trainY),
+  epochs = 5
+)
+save_model_hdf5(model, "train01/m2.hdf5")
+```
+
+```{r}
+mEval = evaluate(model, x = data.matrix(testX), y=data.matrix(testY))
+sprintf("Loss: %f  Accuracy: %f", mEval$loss, mEval$acc)
+save_model_weights_hdf5(model, "train01/m2_weight.hdf5")
+```
+
