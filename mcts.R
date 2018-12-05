@@ -1,142 +1,104 @@
 # Store the states of visited nodes
-node.states <- list()
-valid.heroes.id <- c()
+node.states <- list() # Node States Store
+vhi <- 1:20 # Valid Heroes Id List
 
-mcts.pick <- function(lineups, valid.heroes.id, side, all.candidates, max.tryout, random.state, ucb.bias) {
+mcts.pick <- function(lineups, side, valid.heroes.id, n.sims, ucb.bias) {
   # Pick first randomly
   if (all(lineups == 0)) {
     pick <- sample.int(length(lineups), 1)
     lineups[pick] = side
     return(lineups)
   }
-
-  # Make the best pick and return modified lineups
-  current.id <- state.id(lineups)
-  pick.candidates <- valid.next.picks(lineups = lineups,
-                                      valid.heroes.id = valid.heroes.id,
-                                      all.candidates = all.candidates,
-                                      max.tryout = max.tryout,
-                                      random.state = random.state)
-  pick <- evaluate.candidates(candidates = pick.candidates,
-                              lineups = lineups,
-                              parent.id = current.id,
-                              side = side,
-                              ucb.bias = ucb.bias)
+  can.heroes.id <- valid.next.picks(lineups = lineups,
+                                    valid.heroes.id = valid.heroes.id)
+  pick <- eval.candidates(candidates = can.heroes.id,
+                          current.lineups = lineups,
+                          side = side,
+                          n.sims = n.sims,
+                          ucb.bias = ucb.bias)
+  print(length(node.states))
+  print(pick)
   lineups[pick] <- side
   return(lineups)
 }
 
-state.id <- function(lineups) {
-  library(digest)
-  return(digest(lineups, "md5"))
-}
-
-state.available <- function(node.states, state.id){
-  return(!is.null(node.states[[as.character(state.id)]]))
-}
-
-valid.next.picks <- function(lineups, valid.heroes.id, all.candidates, max.tryout, random.state) {
+valid.next.picks <- function(lineups, valid.heroes.id) {
   valid.picks <- c()
   for (i in 1:length(lineups)) {
     if (lineups[i] == 0 && is.element(i, valid.heroes.id)) {
       valid.picks <- append(valid.picks, i)
     }
   }
-  if (all.candidates) {
-    return(valid.picks)
-  } else if(max.tryout > length(valid.picks)) {
-    print("max.tryout is larger than all available candidates, return all instead")
-    return(valid.picks)
-  } else {
-    set.seed(random.state)
-    part <- sample(1:length(valid.picks), max.tryout, replace = FALSE)
-    return(valid.picks[part])
-  }
+  return(valid.picks)
 }
 
-evaluate.candidates <- function(candidates, lineups, parent.id, side, ucb.bias) {
+eval.candidates <- function(candidates, current.lineups, side, n.sims, ucb.bias) {
   # Within all the candidates, only explore the ones without available node state
-  lineups.to.explore <- c()
+  lineups.to.explore <- list()
+  lte.idx <- 1
   for (i in 1:length(candidates)){
-    cad.lineups <- lineups
+    cad.lineups <- current.lineups
     cad.lineups[candidates[i]] <- side
-    if (!state.available(state.id(cad.lineups))) {
-      lineups.to.explore <- append(lineups.to.explore, cad.lineups)
+    cad.lineups.id <- state.id(cad.lineups)
+    if (is.null(node.states[[cad.lineups.id]])) {
+      lineups.to.explore[[lte.idx]] = cad.lineups
+      lte.idx <- lte.idx + 1
     }
   }
-
+  
   # Simulations on all lineups to explore
   if (length(lineups.to.explore) != 0) {
     for(i in 1:length(lineups.to.explore)){
-      sim.result <- simulate(start.lineups = lineups.to.explore[i], valid.heroes.id = valid.heroes.id)
-      update.node.states(node.states, sim.result);
+      # Perform n.sims times of simulations, and update the node states accordingly
+      for (j in 1:n.sims) {
+        ## 3. Simulation
+        sim.result <- simulate(start.lineups = lineups.to.explore[[i]], avail.heroes.id = candidates)
+        ## 4. Backpropagation
+        update.node.states(sim = sim.result);
+      }
     }
   }
-
   # Updating values based on estimated probs
   props <- c()
   visited <- c()
   for (i in 1:length(candidates)) {
-    cad.lineups <- lineups
+    cad.lineups <- current.lineups
     cad.lineups[candidates[i]] <- side
-    cad.state.id <- state.id(cad.lineups)
-    w <- node.states[[cad.state.id]][["w"]]
-    v <- node.states[[cad.state.id]][["v"]]
+    cad.lineups.id <- state.id(cad.lineups)
+    wr <- node.states[[cad.lineups.id]][["wr"]]
+    v <- node.states[[cad.lineups.id]][["v"]]
     visited[i] <- v
     if (side == 1) {
-      props[i] <- w/v
+      props[i] <- wr/v
     } else {
-      props[i] <- 1-(w/v)
+      props[i] <- 1 - (wr/v)
     }
   }
-  visits <- node.states[[as.character(parent.id)]][["v"]][1]
-  if (is.null(visits)) {
-    visits <- 1
+  # Calculate backpropagation scores
+  cl.id <- state.id(current.lineups)
+  cl.visited <- node.states[[cl.id]][["v"]]
+  if (is.null(cl.visited)) {
+    cl.visited <- 1
   }
-  ME <- ucb.bias * sqrt(max(log(visits), 1) / visited)
-  UCB <- props + ME
-
-  # Selection
-  ucb.index <- UCT(props, UCB, weight = TRUE)
+  ucb <- props + ucb.bias * sqrt(max(log(cl.visited), 1) / visited)
+  print(props)
+  print(ucb)
+  
+  # Making decision
+  ucb.index <- uct(props, ucb, weight = TRUE)
   pick <- candidates[ucb.index]
   return(pick)
 }
 
-simulate <- function(start.lineup, valid.heroes.id) {
-  tmp.lineups <- start.lineup
-  r.left.picks <- 5 - sum(tmp.lineups > 0)
-  d.left.picks <- 5 - sum(tmp.lineups < 0)
-  total.left.picks <- r.left.picks + d.left.picks
-  picked.ids <- c()
-  for (i in 1:length(start.lineup)) {
-    if (start.lineup[i] != 0) {
-      picked.ids <- append(picked.ids, i)
-    }
-  }
-  left.ids <- valid.heroes.id[! valid.heroes.id %in% picked.ids]
-  random.picks <- sample(left.ids, total.left.picks, replace = FALSE)
-  print(random.picks)
-  for (i in 1:total.left.picks) {
-    if (i <= r.left.picks) {
-      tmp.lineups[random.picks[i]] <- 1
-    } else {
-      tmp.lineups[random.picks[i]] <- -1
-    }
-  }
-  # evaluation of lineup
-  radiant.win <- predict.win(tmp.lineups)
-  return(list(lineups = tmp.lineups, radiant.win = radiant.win))
-}
-
-UCT <- function(props, UCB, weight=TRUE){
+uct <- function(props, ucb, weight=TRUE) {
   n <- length(props)
   indices <- 1:n
   keep <- c()
   drop <- c()
   for (i in 1:n){
-    if (sum(props[i] <= UCB[-i]) == 0)
+    if (sum(props[i] <= ucb[-i]) == 0)
       keep <- i
-    if (sum(UCB[i] >= props[-i]) == 0)
+    if (sum(ucb[i] >= props[-i]) == 0)
       drop <- i
   }
   if (!is.null(keep)) {
@@ -165,43 +127,56 @@ UCT <- function(props, UCB, weight=TRUE){
 }
 
 update.node.states <- function(sim) {
-    leaf <- sim$last.state
-    vs <- sim$visited.states
-    for (ii in vs){
-      cur.str <- as.character(ii)
-      if (is.null(branch.leaf.relationships[[cur.str]])){
-        branch.leaf.relationships[[cur.str]][["l"]] <<- rep(leaf,2)
-        branch.leaf.relationships[[cur.str]][["l"]] <<- leaf
-      } else{
-        all.leaves <- branch.leaf.relationships[[cur.str]][["l"]]
-        all.leaves <- unique(c(all.leaves,leaf))
-        branch.leaf.relationships[[cur.str]][["l"]] <<- all.leaves
-      }
-
-      if (ii == leaf){
-        branch.leaf.relationships[[cur.str]][["w"]] <<- sim$winning.player
-      }
-      if (ii != leaf) {
-        # Update visits count
-        if (is.null(branch.leaf.relationships[[cur.str]][["v"]])){
-          branch.leaf.relationships[[cur.str]][["v"]] <<- 1
-        } else {
-          k <- branch.leaf.relationships[[cur.str]][["v"]]
-          branch.leaf.relationships[[cur.str]][["v"]] <<- k+1
-        }
-
-        # Update wins count
-        r <- branch.leaf.relationships[[cur.str]][["w"]]
-        if (is.null(r)) r <- 0
-        if (sim$winning.player==1){
-          branch.leaf.relationships[[cur.str]][["w"]] <<- r + 1
-        } else {
-          branch.leaf.relationships[[cur.str]][["w"]] <<- r + 0
-        }
-      }
+  wr <- sim$radiant.win.rate
+  vss <- sim$visited.states
+  for (vs in vss) {
+    vs.id <- state.id(vs)
+    if (is.null(node.states[[vs.id]])){
+      node.states[[vs.id]][["wr"]] <<- 0
+      node.states[[vs.id]][["v"]] <<- 0
     }
+    visited <- node.states[[vs.id]][["v"]]
+    node.states[[vs.id]][["v"]] <<- visited + 1
+    win.rate <- node.states[[vs.id]][["wr"]]
+    node.states[[vs.id]][["wr"]] <<- win.rate + wr
+  }
 }
 
-predict.win <- function(lineups) {
+simulate <- function(start.lineups, avail.heroes.id) {
+  tmp.lineups <- start.lineups
+  r.left.picks <- 5 - sum(tmp.lineups > 0)
+  d.left.picks <- 5 - sum(tmp.lineups < 0)
+  total.left.picks <- r.left.picks + d.left.picks
+  picked.ids <- c()
+  for (i in 1:length(start.lineups)) {
+    if (start.lineups[i] != 0) {
+      picked.ids <- append(picked.ids, i)
+    }
+  }
+  left.ids <- avail.heroes.id[! avail.heroes.id %in% picked.ids]
+  random.picks <- sample(left.ids, total.left.picks, replace = FALSE)
+  visited.states <- list()
+  visited.states[[1]] <- start.lineups
+  for (i in 2:total.left.picks+1) {
+    if (i <= r.left.picks) {
+      tmp.lineups[random.picks[i]] <- 1
+    } else {
+      tmp.lineups[random.picks[i]] <- -1
+    }
+    visited.states[[i]] <- tmp.lineups
+  }
+  # evaluation of lineup
+  r.win.rate <- predict.win.rate(tmp.lineups)
+  return(list(radiant.win.rate = r.win.rate, visited.states = visited.states))
+}
 
+predict.win.rate <- function(lineups) {
+  ########
+  return(runif(1, min = 0.2, max = 0.8))
+  ########
+}
+
+state.id <- function(lineups) {
+  library(digest)
+  return(digest(lineups, "md5"))
 }
